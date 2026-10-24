@@ -1,0 +1,13 @@
+# 统一换行符处理：仓库里存 LF，检出时按各平台默认。
+# 不加这个的话，Windows 上提交、Linux 构建机（Cloudflare/Netlify）检出时
+# 容易出现整文件「被修改」的假差异。
+* text=auto
+
+# 二进制文件不做换行转换
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary

@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-ink-50 text-ink-900 antialiased;
+    /* 防止任何横向溢出 */
+    @apply overflow-x-hidden;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-ink-200;
+  }
+
+  *:focus-visible {
+    @apply outline-none ring-2 ring-brand-400 ring-offset-1 ring-offset-white;
+  }
+}
+
+@layer components {
+  /* ---------- 通用按钮 ---------- */
+  .btn {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm font-medium
+      transition-colors disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply btn border-brand-700 bg-brand-600 text-white hover:bg-brand-700;
+  }
+  .btn-ghost {
+    @apply btn border-ink-200 bg-white text-ink-700 hover:bg-ink-100;
+  }
+  .btn-quiet {
+    @apply btn border-transparent bg-transparent text-ink-500 hover:bg-ink-100 hover:text-ink-800;
+  }
+  .btn-danger {
+    @apply btn border-red-200 bg-white text-red-700 hover:bg-red-50;
+  }
+  .btn-xs {
+    @apply rounded-md px-2 py-0.5 text-xs;
+  }
+
+  /* ---------- 标签 ---------- */
+  .chip {
+    @apply inline-flex items-center rounded-md px-1.5 py-0.5 text-[11px] font-medium leading-4;
+  }
+  .chip-textbook {
+    @apply chip bg-brand-50 text-brand-800 ring-1 ring-inset ring-brand-200;
+  }
+  .chip-user {
+    @apply chip bg-ink-100 text-ink-600 ring-1 ring-inset ring-ink-200;
+  }
+  .chip-country {
+    @apply chip bg-white text-ink-600 ring-1 ring-inset ring-ink-200;
+  }
+  .chip-tag {
+    @apply chip bg-ink-50 text-ink-500 ring-1 ring-inset ring-ink-200;
+  }
+
+  .field-label {
+    @apply mb-1 block text-xs font-semibold tracking-wide text-ink-500;
+  }
+  .input {
+    @apply w-full rounded-lg border border-ink-200 bg-white px-3 py-2 text-sm text-ink-900
+      placeholder:text-ink-300 focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-100;
+  }
+  .panel-card {
+    @apply rounded-xl border border-ink-200 bg-white shadow-card;
+  }
+
+  /* ---------- Markdown 正文（自实现，不引入 typography 插件） ---------- */
+  .md-body {
+    @apply text-sm leading-7 text-ink-800;
+  }
+  .md-body > * + * {
+    @apply mt-3;
+  }
+  .md-body h2 {
+    @apply mt-5 text-base font-bold text-ink-900;
+  }
+  .md-body h3 {
+    @apply mt-4 text-sm font-bold text-ink-900;
+  }
+  .md-body ul {
+    @apply list-disc space-y-1 pl-5 marker:text-ink-400;
+  }
+  .md-body ol {
+    @apply list-decimal space-y-1 pl-5 marker:text-ink-400;
+  }
+  .md-body strong {
+    @apply font-semibold text-ink-900;
+  }
+  .md-body em {
+    @apply italic;
+  }
+  .md-body code {
+    @apply rounded bg-ink-100 px-1 py-0.5 font-mono text-[.85em] text-ink-700;
+  }
+  .md-body a {
+    @apply font-medium text-brand-700 underline decoration-brand-300 underline-offset-2 hover:text-brand-800;
+  }
+  .md-body blockquote {
+    @apply border-l-2 border-ink-200 pl-3 italic text-ink-600;
+  }
+  .md-body hr {
+    @apply my-4 border-ink-200;
+  }
+
+  /* 搜索命中高亮 */
+  .hit {
+    @apply rounded bg-amber-200 px-0.5 text-ink-900;
+  }
+}
+
+@layer utilities {
+  /* 详情卡片与事件名条目等宽：跟随列宽，绝不横跨两列 */
+  .no-tap-highlight {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}

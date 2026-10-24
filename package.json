@@ -1,0 +1,32 @@
+{
+  "name": "history-timeline",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "中国近现代史纲要 第十章 · 历史教材章节时间线（居中单轨 + 左右双列）",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "build:standalone": "tsc --noEmit && vite build --mode standalone && node tools/build-standalone.mjs"
+  },
+  "dependencies": {
+    "@liveblocks/client": "^3.24.5",
+    "@liveblocks/react": "^3.24.5",
+    "@liveblocks/yjs": "^3.24.5",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "yjs": "^13.6.33"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.31",
+    "@types/react-dom": "18.3.7",
+    "@vitejs/plugin-react": "4.7.0",
+    "autoprefixer": "10.6.1",
+    "postcss": "8.5.31",
+    "tailwindcss": "3.4.19",
+    "typescript": "5.9.3",
+    "vite": "5.4.21"
+  }
+}
