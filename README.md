@@ -254,4 +254,6 @@ npm run build:standalone      # → demo-standalone.html
 
 ## 开发文档
 
-开发过程、当前进度、待办与交接说明见 **[DEVLOG.md](./DEVLOG.md)**。
+- **[DEPLOY.md](./DEPLOY.md)** —— 部署到公网的推荐方案与详细步骤（怎么配环境变量、常见坑）
+- **[DEVLOG.md](./DEVLOG.md)** —— 开发过程、当前进度、待办与交接说明
+- **[DEPENDENCIES.md](./DEPENDENCIES.md)** —— 依赖版本清单
