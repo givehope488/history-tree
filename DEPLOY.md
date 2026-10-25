@@ -163,14 +163,18 @@ git push -u origin main
 原因：构建时没读到 key，降级成了单机模式。
 处理：补上环境变量，然后在平台里**触发一次重新部署**（改了环境变量不会自动重构建）。
 
-### 4. sourcemap 会公开源码，而且很大
+### 4. sourcemap 会把源码公开
 
-`vite.config.ts` 里开了 `sourcemap: true`，所以 `dist/assets/*.js.map`
-会把源码原文一起公开，而且它有 **2.3 MB**（比 JS 本体 557 kB 还大），
-学生用手机加载会多花流量。
+`vite.config.ts` 里开了 `sourcemap: true`，所以 `dist/assets/*.js.map` 有 **2.3 MB**
+（比 JS 本体 573 kB 还大），内容是源码原文。
 
-教学项目没什么可保密的，但如果你在意，把 `vite.config.ts` 里的 `sourcemap: true`
-改成 `false` 即可。
+**先澄清一点**（这条文档早先写错了，特此更正）：这个 map 文件**不会**给普通用户带来流量开销。
+浏览器只在**打开了开发者工具**时才会去请求 sourcemap，正常访问页面根本不会下载它。
+所以「学生用手机加载会多花流量」这个说法是**错的**。
+
+真正的影响只有一个：**源码是公开可读的**。教学项目没什么可保密的，
+但如果你不想公开，把 `vite.config.ts` 里的 `sourcemap: true` 改成 `false` 即可
+（顺带部署上传的体积和时间也会小一点）。
 
 ### 5. 构建机 Node 版本太老
 
