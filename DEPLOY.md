@@ -174,9 +174,32 @@ git push -u origin main
 
 ### 5. 构建机 Node 版本太老
 
-本地验证用的是 Node **v24.17.0**。Vite 5 要求 Node ≥ 18。
+本地验证用的是 Node **v24.17.0**。Vite 6 要求 Node ≥ 18。
 如果平台构建报 Node 相关的错，在平台的环境变量里加一条
 `NODE_VERSION` = `22`（或 `20`），重新部署。
+
+### 6. 报「Vite 版本太低，无法自动配置」
+
+**已经遇到过的报错**：
+
+```
+The version of Vite used in the project ("5.4.21") cannot be automatically configured.
+Please update the Vite version to at least "6.0.0" and try again.
+```
+
+原因：Cloudflare 的**框架自动配置**（Framework preset 选了 `Vite`）要求 Vite ≥ 6.0.0。
+
+**已经修好了**：项目现在是 **Vite 6.4.5**（`@vitejs/plugin-react` 保持 4.7.0，
+它的 peer 范围覆盖 `^6.0.0`）。所以正常走 Git 自动部署不会再报这个。
+
+如果以后又碰到类似的「框架版本不支持」：
+
+- **办法一**：把 Framework preset 改成 **`None`**，然后手动填
+  Build command `npm run build`、Output directory `dist`。
+  这样平台就不做框架自动配置，只按你给的两条命令跑，对版本没有要求。
+- **办法二**：升级依赖。注意 **不要盲目升到 Vite 8**——
+  `@vitejs/plugin-react@4.7.0` 只支持到 Vite 7，升 8 必须同时升 plugin-react 到 6.x，
+  会额外引入 `oxc-transform-react`、`@rolldown/plugin-babel`、`babel-plugin-react-compiler` 三个 peer 依赖。
 
 ---
 

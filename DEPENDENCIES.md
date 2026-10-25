@@ -29,7 +29,14 @@
 | postcss | 8.5.31 | 8.5.31 |
 | tailwindcss | 3.4.19 | 3.4.19 |
 | typescript | 5.9.3 | 5.9.3 |
-| vite | 5.4.21 | 5.4.21 |
+| vite | 6.4.5 | 6.4.5 |
+
+> **为什么是 Vite 6 而不是最新的 8**：Cloudflare Pages 的自动配置要求 Vite ≥ 6.0.0
+> （用 5.4.21 会直接报 `cannot be automatically configured`）。
+> 而 `@vitejs/plugin-react@4.7.0` 的 peer 范围是 `^4.2.0 || ^5.0.0 || ^6.0.0 || ^7.0.0`，
+> **支持 6 和 7 但不支持 8**——升到 Vite 8 就得把 plugin-react 升到 6.x，
+> 那会额外引入 `oxc-transform-react`、`@rolldown/plugin-babel`、`babel-plugin-react-compiler`。
+> Vite 6 的 Node 要求（`^18 || ^20 || >=22`）也最宽松，对构建机的 Node 版本最不挑。
 
 > 协同相关的几个包（`@liveblocks/*`、`yjs`）用的是 `^` 范围，其余都是精确版本。
 > 如果要做可复现的构建，优先依赖下面的 `package-lock.json`，而不是这张表。
@@ -75,7 +82,7 @@ npm 会自动补齐对应平台的原生二进制和 `node_modules/.bin/` 下的
 
 ```bash
 npm run typecheck        # tsc --noEmit，通过
-npm run build            # 类型检查 + vite build，通过（约 557 kB / gzip 179 kB）
+npm run build            # 类型检查 + vite build，通过（约 573 kB / gzip 180 kB）
 npm run build:standalone # 单机演示版，通过（产物内不含 Liveblocks key）
 ```
 
